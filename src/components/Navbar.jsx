@@ -1,10 +1,58 @@
-import React, { useRef } from 'react';
+import gsap from 'gsap';
+import React, { useEffect, useRef, useState } from 'react';
 import { TiLocationArrow } from 'react-icons/ti';
+import { useWindowScroll } from 'react-use';
 import Button from './Button';
 
 const Navbar = () => {
+    const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+    const [isIndicatorActive, setIndicatorActive] = useState(false);
     const navContainerRef = useRef(null);
+    const audioElementRef = useRef(null);
+
+    const { y: currentScrollY } = useWindowScroll();
+
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const [isNavVisible, setIsNavVisible] = useState(true);
+
+    useEffect(() => {
+        if (currentScrollY === 0) {
+            setIsNavVisible(true);
+            navContainerRef.current.classList.remove('floating-nav');
+        } else if (currentScrollY > lastScrollY) {
+            setIsNavVisible(false);
+            navContainerRef.current.classList.add('floating-nav');
+        } else if (currentScrollY < lastScrollY) {
+            setIsNavVisible(true);
+            navContainerRef.current.classList.add('floating-nav');
+        }
+
+        setLastScrollY(currentScrollY);
+    }, [currentScrollY, lastScrollY]);
+
+    useEffect(() => {
+        gsap.to(navContainerRef.current, {
+            y: isNavVisible ? 0 : -100,
+            opacity: isNavVisible ? 1 : 0,
+            duration: 0.2,
+        });
+    });
+
+    const toggleAudioIndicator = () => {
+        setIsAudioPlaying((prev) => !prev);
+        setIndicatorActive((prev) => !prev);
+    };
+
     const navItems = ['Nexus', 'Vault', 'Prologue', 'About'];
+
+    useEffect(() => {
+        if (isAudioPlaying) {
+            audioElementRef.current.play();
+        } else {
+            audioElementRef.current.pause();
+        }
+    });
+
     return (
         <div
             ref={navContainerRef}
@@ -25,9 +73,37 @@ const Navbar = () => {
                     <div className='flex h-full items-center'>
                         <div className='hidden md:block'>
                             {navItems.map((item) => (
-                                <a className='nav-hover-btn'>{item}</a>
+                                <a
+                                    className='nav-hover-btn'
+                                    key={item}
+                                    href={`#${item.toLowerCase()}`}
+                                >
+                                    {item}
+                                </a>
                             ))}
                         </div>
+                        <button
+                            className='ml-10 flex items-center space-x-0.5 cursor-pointer'
+                            onClick={toggleAudioIndicator}
+                        >
+                            <audio
+                                ref={audioElementRef}
+                                className='hidden'
+                                src='/audio/loop.mp3'
+                                loop
+                            />
+                            {[1, 2, 3, 4].map((bar) => (
+                                <div
+                                    key={bar}
+                                    className={`indicator-line ${
+                                        isIndicatorActive ? 'active' : ''
+                                    }`}
+                                    style={{
+                                        animationDelay: `${bar * 0.1}s`,
+                                    }}
+                                ></div>
+                            ))}
+                        </button>
                     </div>
                 </nav>
             </header>
