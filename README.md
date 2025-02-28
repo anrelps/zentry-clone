@@ -1,20 +1,29 @@
+<div align="center">
+  <br />
+      <img src="https://i.ibb.co/r2c1ypGB/zentry.png" alt="Project Banner">
+  <br />
+
   <div>
     <img src="https://img.shields.io/badge/-React_JS-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB" alt="react.js" />
     <img src="https://img.shields.io/badge/-GSAP-black?style=for-the-badge&logoColor=white&logo=greensock&color=88CE02" alt="greensock" />
     <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="tailwindcss" />
   </div>
 
-  <h3 align="center">An Awwwards Winning Website</h3>
+  <h3 align="center">Zentry - An Awwwards Winning Website</h3>
 
 ## ⚠️ Disclaimer
 
 All design credits go to **[Zentry](https://zentry.com/)**. This project is created purely for **educational purposes** and is not intended for commercial use or public deployment.
 
+## <a name="introduction">🤖 Introduction</a>
+
+A visually captivating website inspired by **[Zentry](https://zentry.com/)**, featuring scroll-triggered animations, geometric transitions, and engaging video storytelling. 
+
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
--   GSAP
--   React.js
--   Tailwind CSS
+- GSAP
+- React.js
+- Tailwind CSS
 
 ## <a name="features">🔋 Features</a>
 
@@ -31,3 +40,5 @@ All design credits go to **[Zentry](https://zentry.com/)**. This project is crea
 👉 **Completely Responsive**: Flawless adaptation across all devices, ensuring a consistent experience.
 
 and many more, including code architecture and reusability
+
+[Live Demo](https://zentry.anrelps.com)
